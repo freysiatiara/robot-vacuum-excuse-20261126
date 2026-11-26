@@ -69,6 +69,8 @@ def main():
         written = handle.read()
     if written != ENTRY:
         raise SystemExit("read-back mismatch: entry.txt is not the entry")
+    if (os.stat(path).st_mode & 0o777) != 0o644:
+        raise SystemExit("output mode is not 0644")
 
 
 if __name__ == "__main__":
